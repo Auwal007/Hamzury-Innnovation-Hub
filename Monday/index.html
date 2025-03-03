@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team AI | Future Technology</title>
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-purple: #9000ff;
+            --dark-bg: #0a0a1a;
+            --darker-bg: #050510;
+            --panel-bg: rgba(23, 23, 50, 0.7);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 243, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(144, 0, 255, 0.05) 0%, transparent 20%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            height: 40vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 243, 255, 0.1), rgba(144, 0, 255, 0.1));
+            z-index: -1;
+        }
+        
+        h1 {
+            font-size: 7rem;
+            font-weight: 800;
+            letter-spacing: 10px;
+            margin: 0;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 
+                0 0 10px rgba(0, 243, 255, 0.5),
+                0 0 20px rgba(0, 243, 255, 0.3),
+                0 0 30px rgba(0, 243, 255, 0.1);
+            animation: pulse 3s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% {
+                text-shadow: 
+                    0 0 10px rgba(0, 243, 255, 0.5),
+                    0 0 20px rgba(0, 243, 255, 0.3),
+                    0 0 30px rgba(0, 243, 255, 0.1);
+            }
+            100% {
+                text-shadow: 
+                    0 0 15px rgba(144, 0, 255, 0.5),
+                    0 0 30px rgba(144, 0, 255, 0.3),
+                    0 0 45px rgba(144, 0, 255, 0.1);
+            }
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            letter-spacing: 5px;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+        }
+
+        /* New Info Section */
+        .info-section {
+            margin: 40px 0;
+            text-align: center;
+            padding: 20px;
+            background: var(--panel-bg);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .info-section p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .doc-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: transparent;
+            border: 2px solid var(--neon-blue);
+            border-radius: 25px;
+            color: var(--neon-blue);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .doc-link:hover {
+            background: var(--neon-blue);
+            color: var(--dark-bg);
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+        
+        .team-members {
+            margin: 50px 0;
+            position: relative;
+        }
+        
+        .team-members::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), var(--neon-purple), transparent);
+        }
+        
+        h2 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-align: center;
+            letter-spacing: 3px;
+        }
+        
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .member-card {
+            background: var(--panel-bg);
+            border-radius: 10px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+        
+        .member-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+        
+        .member-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .member-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .member-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, rgba(0, 243, 255, 0.1), rgba(144, 0, 255, 0.1));
+            border: 2px solid transparent;
+            background-clip: padding-box;
+        }
+        
+        .member-avatar::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            z-index: -1;
+            border-radius: 50%;
+        }
+        
+        .member-name {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 50px 0;
+            color: rgba(255, 255, 255, 0.5);
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), var(--neon-purple), transparent);
+        }
+        
+        /* Animated background elements */
+        .bg-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -10;
+            overflow: hidden;
+        }
+        
+        .bg-element {
+            position: absolute;
+            opacity: 0.15;
+            border: 1px solid;
+            border-radius: 3px;
+        }
+        
+        .bg-element:nth-child(odd) {
+            border-color: var(--neon-blue);
+        }
+        
+        .bg-element:nth-child(even) {
+            border-color: var(--neon-purple);
+        }
+        
+        .bg-element:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 10%;
+            animation: float 15s infinite linear;
+        }
+        
+        .bg-element:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            top: 70%;
+            left: 80%;
+            animation: float 12s infinite linear reverse;
+        }
+        
+        .bg-element:nth-child(3) {
+            width: 40px;
+            height: 40px;
+            top: 40%;
+            left: 30%;
+            animation: float 10s infinite linear;
+        }
+        
+        .bg-element:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            top: 80%;
+            left: 20%;
+            animation: float 20s infinite linear reverse;
+        }
+        
+        .bg-element:nth-child(5) {
+            width: 50px;
+            height: 50px;
+            top: 30%;
+            left: 80%;
+            animation: float 13s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: rotate(0deg) translateY(0) translateX(0);
+            }
+            25% {
+                transform: rotate(90deg) translateY(20px) translateX(20px);
+            }
+            50% {
+                transform: rotate(180deg) translateY(0) translateX(40px);
+            }
+            75% {
+                transform: rotate(270deg) translateY(-20px) translateX(20px);
+            }
+            100% {
+                transform: rotate(360deg) translateY(0) translateX(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 4rem;
+                letter-spacing: 5px;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .members-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-elements">
+        <div class="bg-element"></div>
+        <div class="bg-element"></div>
+        <div class="bg-element"></div>
+        <div class="bg-element"></div>
+        <div class="bg-element"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="header-bg"></div>
+            <h1>TEAM AI</h1>
+            <div class="subtitle">Redefining the future of intelligence</div>
+        </header>
+
+        <!-- New Info Section with Google Doc Link -->
+        <section class="info-section">
+            <p>
+                Team AI is dedicated to pushing the boundaries of artificial intelligence to solve real-world challenges. From enhancing cybersecurity to pioneering innovative solutions, our mission is to shape a smarter, safer tomorrow.
+            </p>
+            <a href="https://docs.google.com/document/d/1ixj-yKGu1DxejvvTQOqlj9a9XH8Sn6YFyoXQg-jvt6w/edit?usp=drivesdk" target="_blank" class="doc-link">
+                Discover How AI Enhances Cybersecurity
+            </a>
+        </section>
+        
+        <section class="team-members">
+            <h2>INNOVATORS</h2>
+            <div class="members-grid">
+                <div class="member-card">
+                    <div class="member-avatar">MA</div>
+                    <h3 class="member-name">Muhammad Adam</h3>
+                </div>
+                
+                <div class="member-card">
+                    <div class="member-avatar">MB</div>
+                    <h3 class="member-name">Muhammad Buhari</h3>
+                </div>
+                
+                <div class="member-card">
+                    <div class="member-avatar">NJ</div>
+                    <h3 class="member-name">Nanlop Jacob</h3>
+                </div>
+                
+                <div class="member-card">
+                    <div class="member-avatar">MD</div>
+                    <h3 class="member-name">Mariam Dillo</h3>
+                </div>
+                
+                <div class="member-card">
+                    <div class="member-avatar">MM</div>
+                    <h3 class="member-name">Muhammad Muhammad</h3>
+                </div>
+
+                <div class="member-card">
+                    <div class="member-avatar">MM</div>
+                    <h3 class="member-name">Sadiq Abubakar Lalo</h3>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>© 2025 TEAM AI · ADVANCING THE FUTURE</p>
+        </footer>
+    </div>
+</body>
+</html>
